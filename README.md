@@ -1,1 +1,1 @@
-ToDo application
+ToDo React application
