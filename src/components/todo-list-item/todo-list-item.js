@@ -1,36 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './todo-list-item.css'
 
-export default class ToDoListItem extends Component {
-  constructor() {
-    super();
-
-    this.onLabelClick = () => {
-      this.setState(({ done }) => {
-        return {
-          done: !done
-        }
-      });
-    };
-
-    this.onMarkImportant = () => {
-      this.setState(({ important }) => {
-        return {
-          important: !important
-        }
-      });
-    };
-
-    this.state = {
-      done: false,
-      important: false
-    };
-  }
-
-  render() {
-    const { label, onDeleted } = this.props;
-    const { done, important } = this.state;
-
+const ToDoListItem = ({label, onDeleted, important, done, onToggleImportant, onToggleDone}) => {
     let classNames = 'todo-list-item';
     if (done) {
       classNames += ' done';
@@ -42,16 +13,17 @@ export default class ToDoListItem extends Component {
 
     return (
       <span className={classNames}>
-        <span className="todo-list-item-label" onClick={this.onLabelClick}>
+        <span className="todo-list-item-label" onClick={onToggleDone}>
           {label}
         </span>
-        <button type="button" className="btn btn-outline-success btn-sm float-right" onClick={this.onMarkImportant}>
+        <button type="button" className="btn btn-outline-success btn-sm float-right" onClick={onToggleImportant}>
           <i className="fa fa-exclamation" />
         </button>
         <button type="button" className="btn btn-outline-danger btn-sm float-right" onClick={onDeleted}>
           <i className="fa fa-trash-o" />
         </button>
       </span>
-    )
-  }
+    ) 
 }
+
+export default ToDoListItem;
